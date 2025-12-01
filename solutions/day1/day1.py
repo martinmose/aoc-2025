@@ -37,10 +37,7 @@ def part1(data: str) -> int:
     zero_count = 0
 
     for direction, distance in rotations:
-        if direction == "L":
-            position = (position - distance) % 100
-        else:  # R
-            position = (position + distance) % 100
+        position = (position - distance) % 100 if direction == "L" else (position + distance) % 100
 
         if position == 0:
             zero_count += 1

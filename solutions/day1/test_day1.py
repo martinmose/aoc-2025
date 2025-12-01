@@ -2,7 +2,6 @@
 
 from solutions.day1.day1 import part1, part2
 
-
 EXAMPLE_INPUT = """\
 L68
 L30
