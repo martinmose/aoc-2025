@@ -10,15 +10,14 @@ on-activate = """
   if [ ! -d "$PYTHON_DIR" ]; then
     echo "Creating virtual environment..."
     python -m venv "$PYTHON_DIR"
-    source "$PYTHON_DIR/bin/activate"
-    pip install -e ".[dev]" --quiet
-  else
-    source "$PYTHON_DIR/bin/activate"
+    "$PYTHON_DIR/bin/pip" install -e ".[dev]" --quiet
   fi
 """
 
 [profile]
 common = """
+  source "$FLOX_ENV_CACHE/venv/bin/activate"
+
   alias lint='ruff check . && mypy .'
   alias fmt='ruff format .'
   alias test='pytest'

@@ -9,10 +9,10 @@
       }
     },
     "hook": {
-      "on-activate": "  export PYTHON_DIR=\"$FLOX_ENV_CACHE/venv\"\n  if [ ! -d \"$PYTHON_DIR\" ]; then\n    echo \"Creating virtual environment...\"\n    python -m venv \"$PYTHON_DIR\"\n    source \"$PYTHON_DIR/bin/activate\"\n    pip install -e \".[dev]\" --quiet\n  else\n    source \"$PYTHON_DIR/bin/activate\"\n  fi\n"
+      "on-activate": "  export PYTHON_DIR=\"$FLOX_ENV_CACHE/venv\"\n  if [ ! -d \"$PYTHON_DIR\" ]; then\n    echo \"Creating virtual environment...\"\n    python -m venv \"$PYTHON_DIR\"\n    \"$PYTHON_DIR/bin/pip\" install -e \".[dev]\" --quiet\n  fi\n"
     },
     "profile": {
-      "common": "  alias lint='ruff check . && mypy .'\n  alias fmt='ruff format .'\n  alias test='pytest'\n  alias check='ruff check . && ruff format --check . && mypy . && pytest'\n"
+      "common": "  source \"$FLOX_ENV_CACHE/venv/bin/activate\"\n\n  alias lint='ruff check . && mypy .'\n  alias fmt='ruff format .'\n  alias test='pytest'\n  alias check='ruff check . && ruff format --check . && mypy . && pytest'\n"
     },
     "options": {
       "systems": [
