@@ -1,7 +1,5 @@
 """Tests for Day 3: Lobby."""
 
-import pytest
-
 from solutions.day3.day3 import max_joltage, part1, part2
 
 EXAMPLE_INPUT = """987654321111111
