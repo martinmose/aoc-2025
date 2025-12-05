@@ -13,14 +13,14 @@ def parse_input(data: str) -> tuple[list[tuple[int, int]], list[int]]:
         Tuple of (fresh ranges, available ingredient IDs)
     """
     sections = data.strip().split("\n\n")
-    
+
     ranges = []
     for line in sections[0].split("\n"):
         start, end = line.split("-")
         ranges.append((int(start), int(end)))
-    
+
     ingredients = [int(line) for line in sections[1].split("\n")]
-    
+
     return ranges, ingredients
 
 
