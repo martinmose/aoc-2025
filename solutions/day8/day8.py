@@ -112,7 +112,7 @@ class UnionFind:
             List of component sizes, sorted descending
         """
         sizes = []
-        for i, p in enumerate(self.parent):
+        for i in range(len(self.parent)):
             if self.find(i) == i:
                 sizes.append(self.size[i])
         return sorted(sizes, reverse=True)
@@ -131,13 +131,11 @@ def connect_closest_pairs(
         List of component sizes after making connections
     """
     uf = UnionFind(len(positions))
-    connections_attempted = 0
 
-    for _, i, j in all_pairs_by_distance(positions):
+    for connections_attempted, (_, i, j) in enumerate(all_pairs_by_distance(positions)):
         # Try to connect even if already in same circuit
         uf.union(i, j)
-        connections_attempted += 1
-        if connections_attempted >= num_connections:
+        if connections_attempted + 1 >= num_connections:
             break
 
     return uf.get_component_sizes()
