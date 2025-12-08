@@ -118,9 +118,7 @@ class UnionFind:
         return sorted(sizes, reverse=True)
 
 
-def connect_closest_pairs(
-    positions: list[tuple[int, int, int]], num_connections: int
-) -> list[int]:
+def connect_closest_pairs(positions: list[tuple[int, int, int]], num_connections: int) -> list[int]:
     """Connect the closest pairs of junction boxes.
 
     Args:
