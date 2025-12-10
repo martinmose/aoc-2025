@@ -165,16 +165,16 @@ def solve_machine_part2(target: list[int], buttons: list[list[int]]) -> int:
         return 0 if all(t == 0 for t in target) else -1
 
     # Build the augmented matrix [A | b] where A^T x = b
-    matrix = []
+    matrix: list[list[Fraction]] = []
     for i in range(n_counters):
-        row = []
+        matrix_row: list[Fraction] = []
         for j in range(n_buttons):
             if i in buttons[j]:
-                row.append(Fraction(1))
+                matrix_row.append(Fraction(1))
             else:
-                row.append(Fraction(0))
-        row.append(Fraction(target[i]))
-        matrix.append(row)
+                matrix_row.append(Fraction(0))
+        matrix_row.append(Fraction(target[i]))
+        matrix.append(matrix_row)
 
     # Gaussian elimination to reduced row echelon form
     pivot_row = 0
