@@ -233,7 +233,7 @@ def solve_machine_part2(target: list[int], buttons: list[list[int]]) -> int:
     obj_constant = Fraction(0)
     obj_coefs = [Fraction(1)] * len(free_cols)  # Each free var contributes 1 directly
 
-    for row, pivot_col in enumerate(pivot_cols):
+    for row, _pivot_col in enumerate(pivot_cols):
         obj_constant += matrix[row][n_buttons]
         for i, free_col in enumerate(free_cols):
             # Pivot var contribution: -coef * free
@@ -276,7 +276,7 @@ def solve_machine_part2(target: list[int], buttons: list[list[int]]) -> int:
         # Start with wide bounds - any free var value up to 2x max target should suffice
         lo, hi = 0, max_target * 3
 
-        for row, pivot_col in enumerate(pivot_cols):
+        for row, _pivot_col in enumerate(pivot_cols):
             # Effective RHS after accounting for already-assigned free variables
             effective_rhs = matrix[row][n_buttons]
             for i in range(idx):
@@ -302,11 +302,10 @@ def solve_machine_part2(target: list[int], buttons: list[list[int]]) -> int:
                     else:
                         # No valid value for this var can satisfy constraint
                         return (1, 0)  # Invalid range
-                elif coef < 0:
+                elif coef < 0 and effective_rhs < 0:
                     # effective_rhs - coef * free >= 0 => free >= effective_rhs / coef
-                    if effective_rhs < 0:
-                        lower = math.ceil(float(-effective_rhs) / float(-coef))
-                        lo = max(lo, lower)
+                    lower = math.ceil(float(-effective_rhs) / float(-coef))
+                    lo = max(lo, lower)
 
         return (max(0, lo), max(lo, hi))
 
@@ -343,15 +342,15 @@ def solve_machine_part2(target: list[int], buttons: list[list[int]]) -> int:
                 test_obj = partial_obj + coef * val
                 if test_obj >= best:
                     break
-                search(idx + 1, current + [val])
+                search(idx + 1, [*current, val])
         elif coef >= 0:
             # Can't prune: future variables might decrease objective
             for val in range(lo, hi + 1):
-                search(idx + 1, current + [val])
+                search(idx + 1, [*current, val])
         else:
             # Prefer larger values - as val increases, objective decreases
             for val in range(hi, lo - 1, -1):
-                search(idx + 1, current + [val])
+                search(idx + 1, [*current, val])
 
     search(0, [])
 

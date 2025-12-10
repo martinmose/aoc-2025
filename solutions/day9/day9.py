@@ -146,14 +146,6 @@ def rectangle_valid(
             return False
 
     # Check no polygon edge crosses the rectangle interior
-    # Rectangle edges
-    rect_edges = [
-        (x1, y1, x2, y1),  # Bottom
-        (x1, y2, x2, y2),  # Top
-        (x1, y1, x1, y2),  # Left
-        (x2, y1, x2, y2),  # Right
-    ]
-
     for edge in edges:
         ex1, ey1 = edge[0]
         ex2, ey2 = edge[1]

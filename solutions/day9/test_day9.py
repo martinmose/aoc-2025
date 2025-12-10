@@ -1,7 +1,5 @@
 """Tests for Day 9: Movie Theater."""
 
-import pytest
-
 from solutions.day9.day9 import parse_tiles, part1, part2, point_in_polygon, rectangle_area
 
 EXAMPLE_INPUT = """7,1
